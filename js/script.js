@@ -13,7 +13,6 @@ function randomBackgroundColor() {
   let backgroundColor = `rgb(${r}, ${g}, ${b})`;
   return backgroundColor;
 }
-
 document.body.style.background = randomBackgroundColor();
 
 //An Array of Objects containing quotes
@@ -71,10 +70,14 @@ function printQuote(){
     html += `<span class="tags">${randomQuote.tags}</span>`
   }
   html += `</p>`;
+  document.getElementById(`quote-box`).innerHTML = html;
   return html;
 }
 
-document.getElementById(`quote-box`).innerHTML = printQuote();
+/***
+ * Click event listener for the print quote button.
+***/
+document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
 /***
  * Sets a timer to print a new quote every 10,000 milliseconds (10 seconds).
@@ -83,8 +86,3 @@ function autoPrint(){
   window.location = window.location.href;
 }
 setInterval(`autoPrint()`, 10000);
-
-/***
- * Click event listener for the print quote button.
-***/
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
