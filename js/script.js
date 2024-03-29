@@ -16,7 +16,6 @@ function randomBackgroundColor() {
 
 document.body.style.background = randomBackgroundColor();
 
-
 //An Array of Objects containing quotes
 const quotes = [
   {
@@ -71,11 +70,19 @@ function printQuote(){
   if (randomQuote.tags){
     html += `<span class="tags">${randomQuote.tags}</span>`
   }
-  html += `</p>`
+  html += `</p>`;
   return html;
 }
 
 document.getElementById(`quote-box`).innerHTML = printQuote();
+
+/***
+ * Sets a timer to print a new quote every 10,000 milliseconds (10 seconds).
+***/
+function autoPrint(){
+  window.location = window.location.href;
+}
+setInterval(`autoPrint()`, 10000);
 
 /***
  * Click event listener for the print quote button.
