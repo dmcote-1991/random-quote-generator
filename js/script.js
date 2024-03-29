@@ -3,6 +3,20 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
+/***
+ * Returns a random background color.
+***/
+function randomBackgroundColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  let backgroundColor = `rgb(${r}, ${g}, ${b})`;
+  return backgroundColor;
+}
+
+document.body.style.background = randomBackgroundColor();
+
+
 //An Array of Objects containing quotes
 const quotes = [
   {
