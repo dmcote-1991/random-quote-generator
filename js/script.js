@@ -18,29 +18,29 @@ document.body.style.background = randomBackgroundColor();
 //An Array of Objects containing quotes
 const quotes = [
   {
-    quote: `"Programming isn't about what you know; it's about what you can figure out."`,
+    quote: `Programming isn't about what you know; it's about what you can figure out.`,
     source: `Chris Pine`,
     citation: `Learn to Program`,
   },
   {
-    quote: `"The most damaging phrase in the language is 'We've always done it this way!'"`,
+    quote: `The most damaging phrase in the language is 'We've always done it this way!'`,
     source: `Grace Murray Hopper`,
     year: `1987`
   },
   {
-    quote: `"Everybody should learn to program a computer because it teaches you how to think."`,
+    quote: `Everybody should learn to program a computer because it teaches you how to think.`,
     source: `Steve Jobs`,
     year: `1995`
   },
   {
-    quote: `"Experience is the name everyone gives to their mistakes."`,
+    quote: `Experience is the name everyone gives to their mistakes.`,
     source: `Oscar Wilde`,
     citation: `Lady Windermere's Fan`,
     year: `1892`,
     tags: `Historical`
   },
   {
-    quote: `"Code is like humor. When you have to explain it, it's bad."`,
+    quote: `Code is like humor. When you have to explain it, it's bad.`,
     source: `Cory House`,
   }
 ]
@@ -59,7 +59,7 @@ function getRandomQuote(){
 ***/
 function printQuote(){
   let randomQuote = getRandomQuote();
-  let html = `<p class="quotes">${randomQuote.quote}</p> <p class="source">${randomQuote.source}`;
+  let html = `<p class="quote">${randomQuote.quote}</p> <p class="source">${randomQuote.source}`;
   if (randomQuote.citation){
     html += `<span class="citation">${randomQuote.citation}</span>`
   }
@@ -80,6 +80,6 @@ function printQuote(){
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
 /***
- * Sets a timer to print a new quote with new background color every 10,000 milliseconds (10 seconds).
+ * Sets a timer to print a new quote with a new background color every 10,000 milliseconds (10 seconds).
 ***/
 setInterval(printQuote, 10000);
