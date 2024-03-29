@@ -15,18 +15,15 @@ const quotes = [
     quote: `"Programming isn't about what you know; it's about what you can figure out."`,
     source: `Chris Pine`,
     citation: `Learn to Program`,
-    year: `2021`
   },
   {
     quote: `"The most damaging phrase in the language is 'We've always done it this way!'"`,
     source: `Grace Murray Hopper`,
-    citation:`Information Week (interview)`,
     year: `1987`
   },
   {
     quote: `"Everybody should learn to program a computer because it teaches you how to think."`,
     source: `Steve Jobs`,
-    citation: `On an interview with Robert Cringley`,
     year: `1995`
   },
   {
@@ -38,8 +35,6 @@ const quotes = [
   {
     quote: `"Code is like humor. When you have to explain it, it's bad."`,
     source: `Cory House`,
-    citation: `Twitter`,
-    year: `2013`
   }
 ]
 
@@ -51,17 +46,27 @@ function getRandomQuote(){
   let randomQuote = quotes[randomNumber];
   return randomQuote;
 }
-getRandomQuote();
 
 /***
  * `printQuote` function
 ***/
-
-
+function printQuote(){
+  let randomQuote = getRandomQuote();
+  let html = `<p class="quotes">${randomQuote.quote}</p> <p class="source">${randomQuote.source}`;
+  if (randomQuote.citation){
+    html += `<span class="citation">${randomQuote.citation}</span>`
+  }
+  if (randomQuote.year){
+    html += `<span class="year">${randomQuote.year}</span>`
+  }
+  html += `</p>`
+  return html;
+}
+document.getElementById(`quote-box`).innerHTML = printQuote();
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
-//document.getElementById('load-quote').addEventListener("click", printQuote, false);
+document.getElementById('load-quote').addEventListener("click", printQuote, false);
