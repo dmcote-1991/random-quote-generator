@@ -24,7 +24,8 @@ const quotes = [
     quote: `"Experience is the name everyone gives to their mistakes."`,
     source: `Oscar Wilde`,
     citation: `Lady Windermere's Fan`,
-    year: `1892`
+    year: `1892`,
+    tags: `Historical`
   },
   {
     quote: `"Code is like humor. When you have to explain it, it's bad."`,
@@ -52,6 +53,9 @@ function printQuote(){
   }
   if (randomQuote.year){
     html += `<span class="year">${randomQuote.year}</span>`
+  }
+  if (randomQuote.tags){
+    html += `<span class="tags">${randomQuote.tags}</span>`
   }
   html += `</p>`
   return html;
