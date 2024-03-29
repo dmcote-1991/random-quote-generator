@@ -24,19 +24,19 @@ const quotes = [
     year: `1987`
   },
   {
-    quote: `Everybody should learn to program a computer because it teaches you how to think.`,
+    quote: `"Everybody should learn to program a computer because it teaches you how to think."`,
     source: `Steve Jobs`,
     citation: `On an interview with Robert Cringley`,
     year: `1995`
   },
   {
-    quote: `Experience is the name everyone gives to their mistakes.`,
+    quote: `"Experience is the name everyone gives to their mistakes."`,
     source: `Oscar Wilde`,
     citation: `Lady Windermere's Fan`,
     year: `1892`
   },
   {
-    quote: `Code is like humor. When you have to explain it, it's bad.`,
+    quote: `"Code is like humor. When you have to explain it, it's bad."`,
     source: `Cory House`,
     citation: `Twitter`,
     year: `2013`
@@ -46,8 +46,12 @@ const quotes = [
 /***
  * `getRandomQuote` function
 ***/
-
-
+function getRandomQuote(){
+  const randomNumber = Math.floor(Math.random() * quotes.length);
+  let randomQuote = quotes[randomNumber];
+  return randomQuote;
+}
+getRandomQuote();
 
 /***
  * `printQuote` function
@@ -60,4 +64,4 @@ const quotes = [
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
+//document.getElementById('load-quote').addEventListener("click", printQuote, false);
