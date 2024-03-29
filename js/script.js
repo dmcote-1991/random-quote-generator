@@ -71,7 +71,7 @@ function printQuote(){
   }
   html += `</p>`;
   document.getElementById(`quote-box`).innerHTML = html;
-  return html;
+  document.body.style.background = randomBackgroundColor();
 }
 
 /***
@@ -80,9 +80,6 @@ function printQuote(){
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
 /***
- * Sets a timer to print a new quote every 10,000 milliseconds (10 seconds).
+ * Sets a timer to print a new quote with new background color every 10,000 milliseconds (10 seconds).
 ***/
-function autoPrint(){
-  window.location = window.location.href;
-}
-setInterval(`autoPrint()`, 10000);
+setInterval(printQuote, 10000);
