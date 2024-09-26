@@ -1,7 +1,3 @@
-/******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
-******************************************/
 
 /***
  * Returns a random background color.
@@ -83,3 +79,23 @@ document.getElementById('load-quote').addEventListener("click", printQuote, fals
  * Sets a timer to print a new quote with a new background color every 10,000 milliseconds (10 seconds).
 ***/
 setInterval(printQuote, 10000);
+
+/***
+ * Handle favorite quotes
+***/
+
+let favoriteQuotes = [];
+
+function favoriteQuote() {
+  const currentQuote = getRandomQuote();
+  favoriteQuotes.push(currentQuote);
+  alert("Quote added to favorites!");
+
+  // Update the favorites list in the DOM
+  const favoritesList = document.getElementById('favorites-list');
+  const li = document.createElement('li');
+  li.textContent = `${currentQuote.quote} - ${currentQuote.source}`;
+  favoritesList.appendChild(li);
+}
+
+document.getElementById('favorite-btn').addEventListener("click", favoriteQuote, false);
