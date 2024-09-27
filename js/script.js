@@ -76,9 +76,27 @@ function printQuote(){
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
 /***
- * Sets a timer to print a new quote with a new background color every 10,000 milliseconds (10 seconds).
+ * Handle randomizer toggle
 ***/
-setInterval(printQuote, 10000);
+let intervalId;
+let isRandomizerActive = false; // State of the randomizer
+
+function toggleRandomizer() {
+  const toggleBtn = document.getElementById('toggle-randomizer');
+
+  if (isRandomizerActive) {
+    clearInterval(intervalId); // Stop the randomizer
+    toggleBtn.textContent = "Start"; 
+    isRandomizerActive = false; // Update state
+  } else {
+    intervalId = setInterval(printQuote, 1000); // Start the randomizer
+    toggleBtn.textContent = "Stop";
+    isRandomizerActive = true; // Update state
+  }
+}
+
+// Add event listener to the toggle button
+document.getElementById('toggle-randomizer').addEventListener("click", toggleRandomizer, false);
 
 /***
  * Handle favorite quotes

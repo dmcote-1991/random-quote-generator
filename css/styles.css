@@ -1,7 +1,3 @@
-/** 
- * Treehouse FSJS Techdegree
- * Random Quote Generator - CSS
- */
 
  @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i&display=swap');
 
@@ -20,6 +16,7 @@ header {
   max-width: 1100px;
   margin: auto;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -33,6 +30,7 @@ h1 {
   max-height: 75px;
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-right: 25px;
   padding: 15px 0;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -76,7 +74,55 @@ h1 {
 }
 
 .favorite-quotes {
+  text-align: left; 
+  margin: 0 auto;     
+  width: 90%;      
+  max-width: 1024px;   
+  padding: 20px;
   font-size: 1.5rem;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px; /* Adjusts the space between the label and the button */
+  padding: 0px 10px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 70px; 
+  background-color: rgba(0, 0, 0, 0.1); 
+}
+
+.toggle-label {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
+  font-size: 2rem;
+  font-style: italic;
+  margin-left: 10px;
+}
+
+.toggle-randomizer {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
+  width: 100px;
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .quote-box {
