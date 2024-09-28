@@ -1,119 +1,112 @@
-
-/***
- * Returns a random background color.
-***/
-function randomBackgroundColor() {
-  const r = Math.floor(Math.random() * 256);
-  const g = Math.floor(Math.random() * 256);
-  const b = Math.floor(Math.random() * 256);
-  let backgroundColor = `rgb(${r}, ${g}, ${b})`;
-  return backgroundColor;
-}
-document.body.style.background = randomBackgroundColor();
-
-//An Array of Objects containing quotes
-const quotes = [
-  {
-    quote: `Programming isn't about what you know; it's about what you can figure out.`,
-    source: `Chris Pine`,
-    citation: `Learn to Program`,
-  },
-  {
-    quote: `The most damaging phrase in the language is 'We've always done it this way!'`,
-    source: `Grace Murray Hopper`,
-    year: `1987`
-  },
-  {
-    quote: `Everybody should learn to program a computer because it teaches you how to think.`,
-    source: `Steve Jobs`,
-    year: `1995`
-  },
-  {
-    quote: `Experience is the name everyone gives to their mistakes.`,
-    source: `Oscar Wilde`,
-    citation: `Lady Windermere's Fan`,
-    year: `1892`,
-    tags: `Historical`
-  },
-  {
-    quote: `Code is like humor. When you have to explain it, it's bad.`,
-    source: `Cory House`,
-  }
-]
-
-/***
- * Returns a random object from the quotes array.
-***/
-function getRandomQuote(){
-  let randomNumber = Math.floor(Math.random() * quotes.length);
-  let randomQuote = quotes[randomNumber];
-  return randomQuote;
-}
-
-/***
- * Returns a concatenated string of HTML to include all the available parameters from a random object in the quotes array.
-***/
-function printQuote(){
-  let randomQuote = getRandomQuote();
-  let html = `<p class="quote">${randomQuote.quote}</p> <p class="source">${randomQuote.source}`;
-  if (randomQuote.citation){
-    html += `<span class="citation">${randomQuote.citation}</span>`
-  }
-  if (randomQuote.year){
-    html += `<span class="year">${randomQuote.year}</span>`
-  }
-  if (randomQuote.tags){
-    html += `<span class="tags">${randomQuote.tags}</span>`
-  }
-  html += `</p>`;
-  document.getElementById(`quote-box`).innerHTML = html;
-  document.body.style.background = randomBackgroundColor();
-}
-
-/***
- * Click event listener for the print quote button.
-***/
-document.getElementById('load-quote').addEventListener("click", printQuote, false);
-
-/***
- * Handle randomizer toggle
-***/
-let intervalId;
-let isRandomizerActive = false; // State of the randomizer
-
-function toggleRandomizer() {
-  const toggleBtn = document.getElementById('toggle-randomizer');
-
-  if (isRandomizerActive) {
-    clearInterval(intervalId); // Stop the randomizer
-    toggleBtn.textContent = "Start"; 
-    isRandomizerActive = false; // Update state
-  } else {
-    intervalId = setInterval(printQuote, 1000); // Start the randomizer
-    toggleBtn.textContent = "Stop";
-    isRandomizerActive = true; // Update state
+// Quote class representing a single quote
+class Quote {
+  constructor(quote, source, citation = '', year = '', tags = '') {
+    this.quote = quote;
+    this.source = source;
+    this.citation = citation;
+    this.year = year;
+    this.tags = tags;
   }
 }
 
-// Add event listener to the toggle button
-document.getElementById('toggle-randomizer').addEventListener("click", toggleRandomizer, false);
+// QuoteManager class for managing quotes
+class QuoteManager {
+  constructor() {
+    this.quotes = [
+      new Quote(`Programming isn't about what you know; it's about what you can figure out.`, 'Chris Pine', 'Learn to Program'),
+      new Quote(`The most damaging phrase in the language is 'We've always done it this way!`, `Grace Murray Hopper`, '', '1987'),
+      new Quote(`Everybody should learn to program a computer because it teaches you how to think.`, `Steve Jobs`, '', '1995'),
+      new Quote(`Experience is the name everyone gives to their mistakes.`, `Oscar Wilde`, `Lady Windermere's Fan`, '1892', 'Historical'),
+      new Quote(`Code is like humor. When you have to explain it, it's bad.`, `Cory House`)
+    ];
+    this.favoriteQuotes = [];
+  }
 
-/***
- * Handle favorite quotes
-***/
+  getRandomQuote() {
+    const randomNumber = Math.floor(Math.random() * this.quotes.length);
+    return this.quotes[randomNumber];
+  }
 
-let favoriteQuotes = [];
-
-function favoriteQuote() {
-  const currentQuote = getRandomQuote();
-  favoriteQuotes.push(currentQuote);
-  alert("Quote added to favorites!");
-
-  // Update the favorites list in the DOM
-  const favoritesList = document.getElementById('favorites-list');
-  const li = document.createElement('li');
-  li.textContent = `${currentQuote.quote} - ${currentQuote.source}`;
-  favoritesList.appendChild(li);
+  addFavorite(quote) {
+    this.favoriteQuotes.push(quote);
+  }
 }
 
-document.getElementById('favorite-btn').addEventListener("click", favoriteQuote, false);
+// UIManager class for handling UI interactions
+class UIManager {
+  constructor(quoteManager) {
+    this.quoteManager = quoteManager;
+    this.currentQuote = null;
+
+    this.quoteBox = document.getElementById('quote-box');
+    this.favoritesList = document.getElementById('favorites-list');
+
+    this.loadQuoteBtn = document.getElementById('load-quote');
+    this.favoriteBtn = document.getElementById('favorite-btn');
+    this.toggleBtn = document.getElementById('toggle-randomizer');
+
+    this.loadQuoteBtn.addEventListener("click", () => this.displayQuote());
+    this.favoriteBtn.addEventListener("click", () => this.addToFavorites());
+    this.toggleBtn.addEventListener("click", () => this.toggleRandomizer());
+  }
+
+  displayQuote() {
+    const randomQuote = this.quoteManager.getRandomQuote();
+    this.currentQuote = randomQuote;
+
+    let html = `<p class="quote">${randomQuote.quote}</p><p class="source">${randomQuote.source}`;
+    
+    if (randomQuote.citation) {
+      html += `<span class="citation">${randomQuote.citation}</span>`;
+    }
+    if (randomQuote.year) {
+      html += `<span class="year">${randomQuote.year}</span>`;
+    }
+    if (randomQuote.tags) {
+      html += `<span class="tags">${randomQuote.tags}</span>`;
+    }
+    
+    html += `</p>`;
+    this.quoteBox.innerHTML = html;
+    document.body.style.background = this.randomBackgroundColor();
+  }
+
+  randomBackgroundColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  addToFavorites() {
+    if (!this.currentQuote) {
+      alert("No quote displayed to add to favorites.");
+      return;
+    }
+
+    this.quoteManager.addFavorite(this.currentQuote);
+
+    const li = document.createElement('li');
+    li.textContent = `${this.currentQuote.quote} - ${this.currentQuote.source}`;
+    this.favoritesList.appendChild(li);
+    alert("Quote added to favorites!");
+  }
+
+  toggleRandomizer() {
+    if (this.isRandomizerActive) {
+      clearInterval(this.intervalId);
+      this.toggleBtn.textContent = "Start";
+    } else {
+      this.intervalId = setInterval(() => this.displayQuote(), 1000);
+      this.toggleBtn.textContent = "Stop";
+    }
+    this.isRandomizerActive = !this.isRandomizerActive;
+  }
+}
+
+// Instantiate QuoteManager and UIManager
+const quoteManager = new QuoteManager();
+const uiManager = new UIManager(quoteManager);
+
+// Load a quote on initial load
+uiManager.displayQuote();

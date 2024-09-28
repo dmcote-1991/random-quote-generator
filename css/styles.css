@@ -125,6 +125,11 @@ h1 {
   align-items: center;
 }
 
+.toggle-randomizer:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
 .quote-box {
   text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
   line-height: 1.5;
