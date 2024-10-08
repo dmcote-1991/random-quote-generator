@@ -1,6 +1,12 @@
 // Quote class representing a single quote
 class Quote {
-  constructor(quote, source, citation = '', year = '', tags = '') {
+  quote: string;
+  source: string;
+  citation: string;
+  year: string;
+  tags: string;
+
+  constructor(quote: string, source: string, citation = '', year = '', tags = '') {
     this.quote = quote;
     this.source = source;
     this.citation = citation;
@@ -11,6 +17,9 @@ class Quote {
 
 // QuoteManager class for managing quotes
 class QuoteManager {
+  quotes: Quote[];
+  favoriteQuotes: Quote[];
+
   constructor() {
     this.quotes = [
       new Quote(`Programming isn't about what you know; it's about what you can figure out.`, 'Chris Pine', 'Learn to Program'),
@@ -22,35 +31,47 @@ class QuoteManager {
     this.favoriteQuotes = [];
   }
 
-  getRandomQuote() {
+  getRandomQuote(): Quote {
     const randomNumber = Math.floor(Math.random() * this.quotes.length);
     return this.quotes[randomNumber];
   }
 
-  addFavorite(quote) {
+  addFavorite(quote: Quote): void {
     this.favoriteQuotes.push(quote);
   }
 }
 
 // UIManager class for handling UI interactions
 class UIManager {
-  constructor(quoteManager) {
+  quoteManager: QuoteManager;
+  currentQuote: Quote | null;
+  quoteBox: HTMLElement;
+  favoritesList: HTMLElement;
+  loadQuoteBtn: HTMLElement;
+  favoriteBtn: HTMLElement;
+  toggleBtn: HTMLElement;
+  isRandomizerActive: boolean;
+  intervalId?: number;
+
+  constructor(quoteManager: QuoteManager) {
     this.quoteManager = quoteManager;
     this.currentQuote = null;
 
-    this.quoteBox = document.getElementById('quote-box');
-    this.favoritesList = document.getElementById('favorites-list');
+    this.quoteBox = document.getElementById('quote-box') as HTMLElement;
+    this.favoritesList = document.getElementById('favorites-list') as HTMLElement;
 
-    this.loadQuoteBtn = document.getElementById('load-quote');
-    this.favoriteBtn = document.getElementById('favorite-btn');
-    this.toggleBtn = document.getElementById('toggle-randomizer');
+    this.loadQuoteBtn = document.getElementById('load-quote') as HTMLElement;
+    this.favoriteBtn = document.getElementById('favorite-btn') as HTMLElement;
+    this.toggleBtn = document.getElementById('toggle-randomizer') as HTMLElement;
+
+    this.isRandomizerActive = false;
 
     this.loadQuoteBtn.addEventListener("click", () => this.displayQuote());
     this.favoriteBtn.addEventListener("click", () => this.addToFavorites());
     this.toggleBtn.addEventListener("click", () => this.toggleRandomizer());
   }
 
-  displayQuote() {
+  displayQuote(): void {
     const randomQuote = this.quoteManager.getRandomQuote();
     this.currentQuote = randomQuote;
 
@@ -71,14 +92,14 @@ class UIManager {
     document.body.style.background = this.randomBackgroundColor();
   }
 
-  randomBackgroundColor() {
+  randomBackgroundColor(): string {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     return `rgb(${r}, ${g}, ${b})`;
   }
 
-  addToFavorites() {
+  addToFavorites(): void {
     if (!this.currentQuote) {
       alert("No quote displayed to add to favorites.");
       return;
@@ -92,7 +113,7 @@ class UIManager {
     alert("Quote added to favorites!");
   }
 
-  toggleRandomizer() {
+  toggleRandomizer(): void {
     if (this.isRandomizerActive) {
       clearInterval(this.intervalId);
       this.toggleBtn.textContent = "Start";

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    /* Basic Compiler Options */
+    "target": "es2016",                        /* Set the JavaScript language version. */
+    "module": "commonjs",                      /* Specify what module code is generated. */
+    "esModuleInterop": true,                   /* Emit additional JavaScript for CommonJS module support. */
+    "forceConsistentCasingInFileNames": true,  /* Ensure correct casing in imports. */
+    "strict": true,                            /* Enable all strict type-checking options. */
+    "skipLibCheck": true                       /* Skip type checking of all .d.ts files. */
+  }
+}
