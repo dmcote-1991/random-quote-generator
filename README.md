@@ -13,7 +13,7 @@ A simple web application that displays random quotes and allows users to save th
 
 - HTML
 - CSS
-- JavaScript
+- TypeScript
 
 ## Installation
 
@@ -23,9 +23,13 @@ A simple web application that displays random quotes and allows users to save th
 
 2. Navigate to the project directory:
    ```bash
-   cd random-quotes
+   cd random-quote-generator
 
-3. Open `index.html` in your web browser.
+3. Compile the TypeScript files:
+   ``` bash
+   tsc ts/script.ts
+
+4. Open `index.html` in your web browser.
 
 ## File Structure
 
@@ -35,10 +39,14 @@ random-quote-generator/
  ├── css/ 
  │  ├── normalize.css 
  │  └── styles.css 
- ├── js/ 
- │  └── script.js 
+ ├── ts/ 
+ │  ├── script.js 
+ │  └── script.ts
  ├── .gitattributes
  ├── .gitignore
+ ├── package-lock.json
+ ├── package.json
+ ├── tsconfig.json
  └── README.md
  ```
 
