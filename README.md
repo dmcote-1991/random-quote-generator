@@ -27,7 +27,7 @@ A simple web application that displays random quotes and allows users to save th
 
 3. Compile the TypeScript files:
    ``` bash
-   tsc ts/script.ts
+   tsc
 
 4. Open `index.html` in your web browser.
 
@@ -39,9 +39,16 @@ random-quote-generator/
  ├── css/ 
  │  ├── normalize.css 
  │  └── styles.css 
+ ├── dist/  # Compiled JavaScript files 
+ │  ├── app.js 
+ │  ├── Quote.js 
+ │  ├── QuoteManager.js 
+ │  └── UIManager.js
  ├── ts/ 
- │  ├── script.js 
- │  └── script.ts
+ │  ├── app.ts 
+ │  ├── Quote.ts 
+ │  ├── QuoteManager.ts 
+ │  └── UIManager.ts
  ├── .gitattributes
  ├── .gitignore
  ├── package-lock.json
@@ -56,6 +63,13 @@ random-quote-generator/
 2. Click the "Show another quote" button to display a new quote.
 3. Click "Add to Favorites" to save the current quote to your favorites.
 4. Use the "Start" button to begin automatic quote display or "Stop" to pause it.
+
+## Recent Changes
+
+- Modularized the project structure for better organization.
+- Added comprehensive code comments for improved readability.
+- Updated TypeScript configuration for optimized compilation.
+- Enhanced the functionality of the random quote generator with dynamic features.
 
 ## Contributing
 
