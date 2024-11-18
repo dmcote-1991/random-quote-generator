@@ -44,7 +44,7 @@ random-quote-generator/
  │  ├── Quote.js 
  │  ├── QuoteManager.js 
  │  └── UIManager.js
- ├── ts/ 
+ ├── src/ 
  │  ├── app.ts 
  │  ├── Quote.ts 
  │  ├── QuoteManager.ts 
