@@ -132,5 +132,11 @@ export class UIManager {
   /* Method to provide accessible alerts */
   announce(message: string): void {
     this.alertBox.textContent = message;
+    this.alertBox.classList.remove("visually-hidden"); 
+    this.alertBox.classList.add("visible"); // Show the alert box
+    setTimeout(() => {
+      this.alertBox.classList.remove("visible"); // Hide the alert box after 3 seconds
+      this.alertBox.classList.add("visually-hidden");
+    }, 3000);
   }
 }

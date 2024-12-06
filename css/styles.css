@@ -231,6 +231,50 @@ button[aria-label] {
   font-style: normal;
 }
 
+/* Add CSS for the `alertBox` class */
+#alert-box {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  visibility: hidden; /* Hidden by default */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#alert-box.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Visually hide elements but keep them accessible to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+
+/* General accessibility improvements */
+[role="alert"] {
+  font-weight: bold;
+}
+
 @media (min-width: 768px) {
   body {
     padding: 25px;
