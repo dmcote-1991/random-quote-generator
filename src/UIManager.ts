@@ -13,6 +13,7 @@ export class UIManager {
   loadQuoteBtn: HTMLElement;    // Button to load a new quote
   favoriteBtn: HTMLElement;     // Button to add quote to favorites
   toggleBtn: HTMLElement;       // Button to start/stop the random quote display
+  alertBox: HTMLElement;        // Hidden alert box for announcements
   isRandomizerActive: boolean;  // Flag indicating if the randomizer is active
   intervalId?: number;          // ID for the interval timer
 
@@ -27,12 +28,30 @@ export class UIManager {
     this.favoriteBtn = document.getElementById('favorite-btn') as HTMLElement;
     this.toggleBtn = document.getElementById('toggle-randomizer') as HTMLElement;
 
+    // aria-live attributes to quote box for announcements
+    this.quoteBox.setAttribute("aria-live", "polite");
+    this.quoteBox.setAttribute("aria-atomic", "true");
+
+    // aria-label attributes to buttons for screen readers
+    this.loadQuoteBtn.setAttribute("aria-label", "Display a new random quote");
+    this.favoriteBtn.setAttribute("aria-label", "Add the current quote to your favorites");
+    this.toggleBtn. setAttribute("aria-label", "Start or stop displaying random quotes automatically");
+
+    // Create a hidden alert box for announcements
+    this.alertBox = document.createElement("div");
+    this.alertBox.setAttribute("role", "alert");
+    this.alertBox.classList.add("visually-hidden");
+    document.body.appendChild(this.alertBox);
+
     this.isRandomizerActive = false; // Randomizer is inactive initially
 
     // Add event listeners for button clicks
     this.loadQuoteBtn.addEventListener("click", () => this.displayQuote());
     this.favoriteBtn.addEventListener("click", () => this.addToFavorites());
     this.toggleBtn.addEventListener("click", () => this.toggleRandomizer());
+    this.toggleBtn.addEventListener("blur", () => {
+      if (this.isRandomizerActive) this.toggleRandomizer(); // Stop randomizer on focus loss
+    });
   }
 
   /* Method to display a random quote in the quote box */
@@ -71,7 +90,7 @@ export class UIManager {
   addToFavorites(): void {
     // Alert if no quote is displayed
     if (!this.currentQuote) {
-      alert("No quote displayed to add to favorites.");
+      this.announce("No quote displayed to add to favorites.");
       return; // Exit the function
     }
 
@@ -79,9 +98,20 @@ export class UIManager {
     this.quoteManager.addFavorite(this.currentQuote);
 
     const li = document.createElement('li'); // Create a new list item
+    li.setAttribute("role", "listitem");
     li.textContent = `${this.currentQuote.quote} - ${this.currentQuote.source}`; // Set text for list item
+
+    // Add a remove button to each favorite
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.setAttribute("aria-label", `Remove quote: ${this.currentQuote.quote}`);
+    removeBtn.addEventListener("click", () => li.remove());
+
+    li.appendChild(removeBtn); // Append the remove button to the list item
     this.favoritesList.appendChild(li); // Append the list item to the favorites list
-    alert("Quote added to favorites!"); // Alert the user
+    li.focus(); // Move focus to the new favorite
+
+    this.announce("Quote added to favorites!");
   }
 
   /* Method to start/stop the random quote display */
@@ -89,11 +119,18 @@ export class UIManager {
     if (this.isRandomizerActive) {
       clearInterval(this.intervalId); // Stop the interval if active
       this.toggleBtn.textContent = "Start"; // Change button text to "Start"
+      this.announce("Randomizer stopped.");
     } else {
       this.intervalId = setInterval(() => this.displayQuote(), 1000); // Start interval for displaying quotes
       this.toggleBtn.textContent = "Stop"; // Change button text to "Stop"
+      this.announce("Randomizer started.");
     }
     // Toggle the active state
     this.isRandomizerActive = !this.isRandomizerActive;
+  }
+
+  /* Method to provide accessible alerts */
+  announce(message: string): void {
+    this.alertBox.textContent = message;
   }
 }
