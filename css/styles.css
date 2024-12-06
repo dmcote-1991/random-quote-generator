@@ -21,16 +21,18 @@ header {
 
 h1 {
   text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
+  font-size: 2.5rem;
 }
 
-.load-quote {
+.load-quote,
+.favorite-btn,
+.toggle-randomizer {
   color: #fff;
   text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
   width: 12em;
   max-height: 75px;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-right: 25px;
   padding: 15px 0;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -39,12 +41,16 @@ h1 {
   font-size: 1.5rem;
 }
 
-.load-quote:hover {
+.load-quote:hover,
+.favorite-btn:hover,
+.toggle-randomizer:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.load-quote:focus {
-  outline: none;
+.load-quote:focus,
+.favorite-btn:focus,
+.toggle-randomizer:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
 }
 
 .container {
@@ -55,22 +61,7 @@ h1 {
 }
 
 .favorite-btn {
-  color: #fff;
-  text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
-  width: 12em;
-  max-height: 75px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 15px 0;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  transition: 0.5s;
   font-size: 1.5rem;
-}
-
-.favorite-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .favorite-quotes {
@@ -80,6 +71,45 @@ h1 {
   max-width: 1024px;   
   padding: 20px;
   font-size: 1.5rem;
+}
+
+/* Remove Button Styling */
+button {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  padding: 8px 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Hover State */
+button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 1);
+  color: #ffcc00; /* Gold color for hover effect */
+}
+
+/* Focus State */
+button:focus {
+  outline: 3px solid #ffcc00;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Active State */
+button:active {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.8);
+  color: #ffcc00;
+}
+
+/* Accessibility: Visually hidden label for screen readers */
+button[aria-label] {
+  display: inline-block;
 }
 
 .btn-group {
@@ -107,8 +137,6 @@ h1 {
 }
 
 .toggle-randomizer {
-  color: #fff;
-  text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
   width: 100px;
   height: 100px;
   margin-top: 20px;
@@ -125,14 +153,14 @@ h1 {
   align-items: center;
 }
 
-.toggle-randomizer:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.toggle-randomizer:focus {
+  outline: 3px solid rgba(225, 225, 225, 0.7);
 }
-
 
 .quote-box {
   text-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
   line-height: 1.5;
+  padding-left: 30px;
 }
 
 .quote {
@@ -161,7 +189,6 @@ h1 {
   content: "”";
   bottom: -0.1em;
   margin-left: 0.1em;
-  position: absolute;
 }
 
 .source {
